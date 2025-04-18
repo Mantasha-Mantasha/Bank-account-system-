@@ -1,0 +1,61 @@
+# Bank-account-system-
+class User:
+    def __init__(self, user_id, name, email):
+        self.user_id = user_id
+        self.name = name
+        self.email = email
+        self.cart = []
+
+    def add_to_cart(self, product):
+        self.cart.append(product)
+
+    def view_cart(self):
+        return self.cart
+
+
+class Product:
+    def __init__(self, product_id, name, price, stock):
+        self.product_id = product_id
+        self.name = name
+        self.price = price
+        self.stock = stock
+
+    def update_stock(self, quantity):
+        self.stock -= quantity
+
+
+class Order:
+    def __init__(self, order_id, user, products):
+        self.order_id = order_id
+        self.user = user
+        self.products = products
+
+    def calculate_total(self):
+        total = sum(product.price for product in self.products)
+        return total
+
+
+class ECommerceSystem:
+    def __init__(self):
+        self.users = []
+        self.products = []
+        self.orders = []
+
+    def add_user(self, user):
+        self.users.append(user)
+
+    def add_product(self, product):
+        self.products.append(product)
+
+    def place_order(self, user_id):
+        user = next((u for u in self.users if u.user_id == user_id), None)
+        if not user:
+            print("User not found.")
+            return
+
+        if not user.cart:
+            print("Cart is empty.")
+            return
+
+        # Check product stock
+        for product
